@@ -41,4 +41,5 @@ class BaseSchema(Schema):
                 if isinstance(v, str) \
                     else fields.Integer(required=True) if isinstance(v, int) \
                     else fields.Float(required=True) if isinstance(v, float) \
-                    else fields.Boolean(required=True)
+                    else fields.Boolean(required=True) if isinstance(v, bool) \
+                    else fields.String(required=False, allow_none=True)
