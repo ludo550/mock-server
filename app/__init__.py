@@ -40,13 +40,13 @@ bofa_response = { "response": {
 @app.route("/bofamock", methods=['POST'])
 def bofamock():
     request_data = request.json
-    try:
-        schema = BaseSchema()
-        schema.add()
-        schema.load(request_data)
-    except ValidationError as err:
-        # Return a nice message if validation fails
-        return jsonify(err.messages), 400
+    # try:
+    #     schema = BaseSchema()
+    #     schema.add()
+    #     schema.load(request_data)
+    # except ValidationError as err:
+    #     # Return a nice message if validation fails
+    #     return jsonify(err.messages), 400
     try:
         file = open('bofa_mock.json', 'r')
         bofa_resp = json.loads(file.read())
