@@ -6,6 +6,7 @@
 #
 
 -i https://pypi.org/simple/
+APScheduler
 blinker==1.4
 certifi==2022.12.7
 charset-normalizer==2.0.7
