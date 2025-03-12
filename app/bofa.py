@@ -4,38 +4,80 @@ class BaseSchema(Schema):
     # traceId = fields.String(required=True)
     def add(self):
         sample = {
-            "traceId": "dummy",
-            "partner": "dummy",
-            "affiliate": "dummy",
-            "clientGroup": "dummy",
-            "clientId": "0001",
-            "debtorAccountId": "dummy",
-            "clientPaymentId": "dummy",
-            "provider": "BOA",
-            "method": "RECIPIENTSELECT",
-            "purpose": "CLAIM_PAYMENT",
-            "requestedExecutionTime": "2025-03-11T10:21:05.737Z",
-            "payeePaymentReference": "dummy",
-            "memo": "dummy ",
-            "description": None,
-            "currency": "USD",
-            "amount": "300.00",
-            "amountScale": 0,
-            "roundingMode": "HALF_UP",
-            "recipientExternalId": "dummy",
-            "recipientGivenName": "Test",
-            "recipientFamilyName": "Test",
-            "recipientAdditionalName": None,
-            "recipientFullName": "Test Test",
-            "deliveryEmail": "dummy@dummy.com",
-            "deliveryCellPhone": None,
-            "deliveryAddressOne": "dummy street",
-            "deliveryAddressTwo": "dummy street",
-            "deliveryCity": "Houston",
-            "deliveryState": "TX",
-            "deliveryPostalCode": "77081",
-            "deliveryCountry": "US"
-        }
+                    "paymentIdentification": {
+                        "instructionIdentification": "test-01",
+                        "endToEndIdentification": "TIPS15660"
+                    },
+                    "paymentMethod": "TRF",
+                    "requestedExecutionDate": "2025-03-12",
+                    "amount": {
+                        "value": "20.00"
+                    },
+                    "debtorAccount": {
+                        "identification": "TIPS1-ACCT-NUM",
+                        "currency": "USD"
+                    },
+                    "debtorAgent": None,
+                    "debtor": {
+                        "name": "TBD",
+                        "type": "TBD",
+                        "postalAddress": {
+                            "addressLine": [
+                                "AddressOne",
+                                "AddressTwo"
+                            ],
+                            "city": "TBD-City",
+                            "countrySubDivision": "CA",
+                            "postalCode": "92121",
+                            "country": "US"
+                        },
+                        "contactDetails": {
+                            "phoneNumber": None,
+                            "emailAddress": "TBD"
+                        },
+                        "identifiers": [
+                            {
+                                "identification": "TDB1",
+                                "schemeName": "TDB1"
+                            },
+                            {
+                                "identification": "TDB2",
+                                "schemeName": "TDB2"
+                            }
+                        ]
+                    },
+                    "ultimateDebtor": None,
+                    "creditor": {
+                        "name": "Test Test",
+                        "type": "IND",
+                        "postalAddress": {
+                            "addressLine": [
+                                "6000 Chimney Rock Rd",
+                                "Gulfton Harris County 4000"
+                            ],
+                            "city": "Houston",
+                            "countrySubDivision": "TX",
+                            "postalCode": "77081",
+                            "country": "US"
+                        },
+                        "contactDetails": {
+                            "mobileNumber": None,
+                            "emailAddress": "test@extern.csatp.com",
+                            "name": "Test Test"
+                        }
+                    },
+                    "creditorAccount": {
+                        "currency": "USD"
+                    },
+                    "paymentType": {
+                        "localInstrument": "CHOICE",
+                        "categoryOfPurpose": "CLAIM_PAYMENT"
+                    },
+                    "checkInstruction": {
+                        "memoField": "test-01 "
+                    },
+                    "unstructuredRemittance": "test-01 "
+                }
         for k, v in sample.items():
             self.fields[k] = self.load_fields[k] = self.declared_fields[k] = fields.String(required=True) \
                 if isinstance(v, str) \
