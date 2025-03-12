@@ -56,7 +56,7 @@ def bofamock():
     except:
         bofa_resp = bofa_response
     if 'endToEndIdentification' in bofa_resp['response']:
-        bofa_resp['response']['endToEndIdentification'] = f"{request_data['debtorAccountId']}{request_data['clientPaymentId']}"
+        bofa_resp['response']['endToEndIdentification'] = f"{request_data['paymentIdentification']['endToEndIdentification']}"
     if 'transactionIdentification' in bofa_resp['response']:
         bofa_resp['response']['transactionIdentification'] = "A0L{}".format(random.randint(1000000000000, 9999999999999))
 
