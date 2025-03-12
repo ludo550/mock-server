@@ -1,4 +1,4 @@
-# Sinnemar
+# Mock-server
 
 # Prerequisties
 
@@ -13,6 +13,3 @@ Installing requirements:
 ```py
 pip3 install -r requirements.txt
 ```
-
-# Live at
-https://sinnemar.ugtc.com
