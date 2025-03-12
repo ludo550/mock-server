@@ -1,3 +1,4 @@
+import json
 import random
 import uuid
 from datetime import datetime
@@ -46,7 +47,11 @@ def bofamock():
     except ValidationError as err:
         # Return a nice message if validation fails
         return jsonify(err.messages), 400
-    bofa_resp = session['bofa_resp'] if 'bofa_resp' in session else bofa_response
+    try:
+        file = open('bofa_mock.json', 'r')
+        bofa_resp = json.loads(file.read())
+    except:
+        bofa_resp = bofa_response
     if 'endToEndIdentification' in bofa_resp['response']:
         bofa_resp['response']['endToEndIdentification'] = f"{request_data['debtorAccountId']}{request_data['clientPaymentId']}"
     if 'transactionIdentification' in bofa_resp['response']:
@@ -56,9 +61,10 @@ def bofamock():
 
 @app.route("/bofamockconfigure", methods=['POST'])
 def bofamockconfigure():
-    session['bofa_resp'] = request.json
-
-    return jsonify({"success": True, "config": session.get('bofa_resp')['response']}), session.get('bofa_resp')['status']
+    bofa_resp = request.json
+    file = open('bofa_mock.json', 'w+')
+    file.write(json.dumps(bofa_resp))
+    return jsonify({"success": True, "config": bofa_resp['response']}), bofa_resp['status']
 
 
 def create_app():
