@@ -1,0 +1,1 @@
+web: python -m pip install spacy && python -m spacy download en && waitress-serve --port=$PORT --call 'app:create_app'
