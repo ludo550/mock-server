@@ -11,6 +11,7 @@ from flask_bootstrap import Bootstrap
 from flask import jsonify
 from dotenv import load_dotenv
 from.bofa import BaseSchema
+import logging
 
 def is_english(s):
     return s.isascii()
@@ -40,6 +41,8 @@ bofa_response = { "response": {
 @app.route("/bofamock", methods=['POST'])
 def bofamock():
     request_data = request.json
+    logging.info(str(request.json))
+    print(str(request.json))
     # try:
     #     schema = BaseSchema()
     #     schema.add()
