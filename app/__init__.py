@@ -11,9 +11,6 @@ from flask_bootstrap import Bootstrap
 from flask import jsonify
 from dotenv import load_dotenv
 from.bofa import BaseSchema
-import requests
-from apscheduler.schedulers.background import BackgroundScheduler
-import atexit
 
 def is_english(s):
     return s.isascii()
@@ -25,16 +22,6 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = uuid.uuid4().hex
 
 Bootstrap(app)
-
-def dummy_revive_call():
-    requests.get('https://mock-server-noze.onrender.com/bofamock')
-
-scheduler = BackgroundScheduler()
-scheduler.add_job(func=dummy_revive_call, trigger="interval", seconds=60)
-scheduler.start()
-
-# Shut down the scheduler when exiting the app
-atexit.register(lambda: scheduler.shutdown())
 
 
 @app.context_processor
